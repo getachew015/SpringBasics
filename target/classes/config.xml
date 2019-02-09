@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean name="welcomeBean" class="com.springcofiguration.WelcomeBean"/>
+	<!-- Dependency Injection By Constructor Method -->
+	<bean name="employeeByConstructer" class="com.dependencyInj.Employee">
+		<constructor-arg value="1000"/>
+		<constructor-arg value="Jeff Bezos"/>
+		<constructor-arg ref="address"/>
+		<constructor-arg value="150000"/>
+	</bean>
+	
+ 	<bean id="address" class="com.dependencyInj.Address">
+		<constructor-arg value="1501 Hawthorne Ave"/>
+		<constructor-arg value="Minneapolis"/>
+		<constructor-arg value="MN"/>
+		<constructor-arg value="55403"/>
+	</bean>
+	
+	<!-- Dependency Injection By Setter Method -->
+	<bean name="employeeBySetter" class="com.dependencyInj.Employee" autowire="byName">
+		<property name="empId" value="1002"/>
+		<property name="empName" value="Elon Musk"/>
+		<property name="address" ref="address"/>
+		<property name="salary" value="140000"/>		
+	</bean>	
+
+ 	</beans>
