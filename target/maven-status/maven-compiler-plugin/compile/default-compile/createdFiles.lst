@@ -1,0 +1,5 @@
+com\springcofiguration\WelcomeBean.class
+com\dependencyInj\EmployeeClient.class
+com\dependencyInj\Address.class
+com\dependencyInj\Employee.class
+com\springcofiguration\CllientLogic.class
