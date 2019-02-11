@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Defining and configuring a bean -->
+	<bean name="welcomeBean" class="com.springcofiguration.WelcomeBean"/>
+	
+	<!-- Dependency Injection By Constructor Method -->
+	<bean name="employeeByConstructer" class="com.dependencyInj.Employee">
+		<constructor-arg value="1000"/>
+		<constructor-arg value="Jeff Bezos"/>
+		<constructor-arg ref="address"/>
+		<constructor-arg value="150000"/>
+	</bean>
+	
+ 	<bean id="address" class="com.dependencyInj.Address">
+		<constructor-arg value="1501 Hawthorne Ave"/>
+		<constructor-arg value="Minneapolis"/>
+		<constructor-arg value="MN"/>
+		<constructor-arg value="55403"/>
+	</bean>
+	
+	<!-- Dependency Injection By Setter Method -->
+	<bean name="employeeBySetter" class="com.dependencyInj.Employee">
+		<property name="empId" value="1002"/>
+		<property name="empName" value="Elon Musk"/>
+		<property name="address" ref="address"/>
+		<property name="salary" value="140000"/>		
+	</bean>	
+	
+	<!-- Dependency Injection Using Autowiring for non primitive data types mostly used defined classes/objects 
+	     in this case Address object and there are more than 3 options "byName", "byType", "constructor"-->
+
+	<bean id="productBean" class="com.autowiring.Product" autowire="byName">
+		<property name="prodId" value="A102"/>
+		<!-- <property name="productDetail" ref="productDetail"/ -->
+		<property name="quantity" value="124"/>
+	</bean>	
+
+	<bean id="productDetail" class="com.autowiring.ProductDetail" >
+		<property name="prodId" value="A102"/>
+		<property name="prodName" value="Apple Gala"/>
+		<property name="price" value="1.53"/>
+	</bean>	
+
+<!-- 	Bean Scope (Singleton or prototype scope)
+	Singleton scope is initialized during the container starts up & the same bean instance is reused every time the bean is requested. 
+	Prototype scope is initialized every time the bean is requested & the container creates a new instance of the prototype bean on every request for the bean.
+ 	If a scope is not specified by default it is Singleton
+ --> 	
+ 	<bean id="book" class="com.beanscope.Book" scope="prototype">
+ 		<property name="bookTitle" value="How to shut the fuck up 10 best ways"/>
+ 		<property name="price" value="68.99"/>
+ 	</bean>
+
+ 	<bean id="author" class="com.beanscope.Author" autowire="byName" scope="singleton">
+ 		<property name="authId" value="A1524"/>
+ 		<property name="authorName" value="Sydney Sheldon"/>
+ 	</bean>
+ </beans>
