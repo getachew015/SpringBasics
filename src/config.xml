@@ -3,19 +3,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-<!--     
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+    <aop:aspectj-autoproxy /> 
     <context:annotation-config/>    
-	The below needs to be sated in the config file inorder to use Autoscan mode of DI and specify the
-    base package to reduce the scan time
+    
+	<!-- The below needs to be sated in the config file inorder to use Autoscan mode of DI and specify the
+    base package to reduce the scan time -->
 	<context:component-scan base-package="com.autoscan"/>
-	
-	Defining and configuring a bean
+
+	<!-- Defining and configuring a bean -->
 	<bean name="welcomeBean" class="com.springcofiguration.WelcomeBean"/>
 	
-	Dependency Injection By Constructor Method
+	<!-- Dependency Injection By Constructor Method -->
 	<bean name="employeeByConstructer" class="com.dependencyInj.Employee">
 		<constructor-arg value="1000"/>
 		<constructor-arg value="Jeff Bezos"/>
@@ -30,7 +36,7 @@
 		<constructor-arg value="55403"/>
 	</bean>
 	
-	Dependency Injection By Setter Method
+	<!-- Dependency Injection By Setter Method -->
 	<bean name="employeeBySetter" class="com.dependencyInj.Employee">
 		<property name="empId" value="1002"/>
 		<property name="empName" value="Elon Musk"/>
@@ -38,13 +44,12 @@
 		<property name="salary" value="140000"/>		
 	</bean>	
 	
-	Autowiring
+	<!-- Autowiring
 		 Dependency Injection Using Autowiring for non primitive data types mostly used defined classes/objects 
-	     in this case Address object and there are more than 3 options "byName", "byType", "constructor"
+	     in this case Address object and there are more than 3 options "byName", "byType", "constructor" -->
 
 	<bean id="productBean" class="com.autowiring.Product" autowire="byName">
 		<property name="prodId" value="A102"/>
-		<property name="productDetail" ref="productDetail"/
 		<property name="quantity" value="124"/>
 	</bean>	
 
@@ -54,10 +59,10 @@
 		<property name="price" value="1.53"/>
 	</bean>	
 
-	Bean Scope (Singleton or prototype scope)
+	<!-- Bean Scope (Singleton or prototype scope)
 	Singleton scope is initialized during the container starts up & the same bean instance is reused every time the bean is requested. 
 	Prototype scope is initialized every time the bean is requested & the container creates a new instance of the prototype bean on every request for the bean.
- 	If a scope is not specified by default it is Singleton
+ 	If a scope is not specified by default it is Singleton -->
  	
  	<bean id="book" class="com.beanscope.Book" scope="prototype">
  		<property name="bookTitle" value="How to shut the fuck up 10 best ways"/>
@@ -69,8 +74,8 @@
  		<property name="authorName" value="Sydney Sheldon"/>
  	</bean>
  	
- 	Annotation and autowiring 
- 		Used the @Autowired annotation to inject the values to student class and here spring will use byType
+ 	<!-- Annotation and autowiring 
+ 		Used the @Autowired annotation to inject the values to student class and here spring will use byType -->
  	
  	<bean id ="course1" class="com.annotation.Courses">
  		<property name="courseCode" value="CS302"/>
@@ -78,15 +83,15 @@
  		<property name="creditHour" value="4"/>
  	</bean>
  	
- 	<bean id ="course2" class="com.annotation.Courses">
+<!--  	<bean id ="course2" class="com.annotation.Courses">
  		<property name="courseCode" value="CS231"/>
  		<property name="courseTitle" value="Network & Internet of things" />
  		<property name="creditHour" value="4"/>
  	</bean>
-
+ -->
  	<bean id="student" class="com.annotation.Student">
  		<property name="studId" value="CS1002"/>
 		<property name="studName" value="That Guy"/>
  	</bean>
  	
- --> </beans>
+ </beans>

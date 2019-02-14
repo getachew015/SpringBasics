@@ -1,0 +1,32 @@
+Aspect Oriented Programming (AOP)
+	- Provides a way for implementing supporting functionalities like transaction, logging, security e.t.c
+	- Because these functionalities are called from multiple locations they are referred as cross-cutting concerns
+	- AOP makes sure that cross-cutting concerns are separated from the main business logic
+	- Key unit of AOP modularity is an Aspect
+	- Aspects are the cross-cutting concerns like logging, transaction management, security 
+	- Joinpoint	The possible program execution points where the Aspects are applied. In Spring it is always the method execution.
+ 	- Advice This represents code to be executed at the selected Joinpoint/s.
+	- Pointcut This identifies on what Joinpoints the advice needs to be applied.    AspectJ Pointcut expression language(EL) is used for this identification.
+	- (Target Object, AOP Proxy and Weaving) At runtime, proxies are created for the business objects(called Target Objects) with the Aspects linked using JDK Dynamic/CGLIB  proxy. 
+	  This process is called Weaving. The object created is called AOP Proxy.
+	- @AspectJ is an extension to the Java programming language to support AOP capabilities.
+	- Any class in the Spring context with @Aspect annotation is an Aspect
+	- 5 types of Advices
+		- Before: executed before jointpoint execution and will continue with jointpoint execution.
+		- Afterthrowing: executed after a jointpoint gets executed and returns without throwing an exception. 
+		- Afterreturning: executed only when a jointpoint exits by throwing an exception.
+		- After: will be executed after a jointpoint returns with or without throwing an exception.
+		- Around: has somelogic which gets executed before the jointpoint and somelogic after the jointpoint returns successfully.
+	E.g Below
+	
+	@Aspect
+	public class LoggingAspect{
+		
+		@Before("execution(* "com.mypack.CalculatePrice.calculate(...))")
+		public void loggin(){
+		}
+	}
+	
+	In the above example the logging Advice will be called before the calculate method of the 
+	CalculatePrice class gets called for any number of arguments and any return type. 			
+	
